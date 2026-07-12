@@ -3,6 +3,7 @@ import { PnlCalculator } from './components/PnlCalculator';
 import { PnlResult } from './components/PnlResult';
 import { StockRecommendations } from './components/StockRecommendations';
 import { PnlInput, PnlResult as PnlResultType, StockRecommendation, fetchStockRecommendations, fetchCurrentStockPrice } from './types';
+import { Sparkles, Activity, AlertCircle } from 'lucide-react';
 
 const App: React.FC = () => {
   const [input, setInput] = useState<PnlInput>({
@@ -92,9 +93,19 @@ const App: React.FC = () => {
         return;
     }
 
-    const pnl = (currentPrice - buyPrice) * quantity;
+    const totalCost = buyPrice * quantity;
+    const currentValue = currentPrice * quantity;
+    const pnl = currentValue - totalCost;
     const isProfit = pnl >= 0;
-    const pnlResult = { pnl, isProfit };
+    const percentage = totalCost > 0 ? (pnl / totalCost) * 100 : 0;
+    const pnlResult = { 
+      pnl, 
+      isProfit,
+      totalCost,
+      currentValue,
+      percentage,
+      symbol: input.symbol
+    };
     setResult(pnlResult);
 
     if (!isProfit) {
@@ -114,42 +125,70 @@ const App: React.FC = () => {
   }, [input]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
-              Indian Stock PNL & RSI Advisor
-            </span>
-          </h1>
-          <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
-            Calculate your unrealized profit or loss. If you're in a loss, our AI will suggest potential recovery opportunities using RSI analysis.
-          </p>
+    <div className="min-h-screen bg-[#0b0f19] text-white font-sans selection:bg-indigo-500/30 selection:text-indigo-200">
+      
+      {/* Decorative top ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[350px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      {/* Main Container */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 relative z-10 space-y-10">
+        
+        {/* Top Header Bar */}
+        <header className="flex flex-col items-center text-center space-y-4">
+          <div className="inline-flex items-center space-x-2 bg-indigo-500/10 text-indigo-400 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border border-indigo-500/20 shadow-lg shadow-indigo-600/5">
+            <Activity className="h-3.5 w-3.5 animate-pulse text-emerald-400" />
+            <span>NSE MARKET INTELLIGENCE ENGAGED</span>
+          </div>
+          
+          <div className="space-y-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white flex items-center justify-center gap-2 flex-wrap">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-indigo-400 to-purple-500">
+                Indian Stock PNL &amp; RSI Advisor
+              </span>
+            </h1>
+            <p className="max-w-2xl text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed mx-auto">
+              Calculate your unrealized holding gains/losses. In the event of a loss, our AI scanning engine crawls overbought/oversold RSI thresholds to source elite recovery setups.
+            </p>
+          </div>
         </header>
 
-        <PnlCalculator 
-            input={input}
-            onInputChange={handleInputChange}
-            onSymbolSelect={handleSymbolSelect}
-            onSubmit={handleSubmit}
-            isLoading={isLoading && !result}
-            isPriceLoading={isPriceLoading}
-        />
-        
-        {priceError && <p className="text-center text-red-400 text-sm mt-4">{priceError}</p>}
-        {error && !priceError && <p className="text-center text-red-400 text-sm mt-4">{error}</p>}
-
-
-        {result && <PnlResult result={result} />}
-
-        {result && !result.isProfit && (
-          <StockRecommendations 
-            recommendations={recommendations}
-            isLoading={isLoading && !result.isProfit}
-            error={!priceError ? error : null} // Only show recommendation error if there's no price error
-            lossAmount={result.pnl}
+        {/* Form and Quick Picks */}
+        <div className="max-w-4xl mx-auto">
+          <PnlCalculator 
+              input={input}
+              onInputChange={handleInputChange}
+              onSymbolSelect={handleSymbolSelect}
+              onSubmit={handleSubmit}
+              isLoading={isLoading && !result}
+              isPriceLoading={isPriceLoading}
           />
-        )}
+          
+          {/* Enhanced Error Alerts */}
+          {(priceError || (error && !priceError)) && (
+            <div className="mt-4 p-4 bg-red-900/15 border border-red-900/40 rounded-xl text-red-300 flex items-start space-x-3 text-xs sm:text-sm">
+              <AlertCircle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
+              <div className="space-y-0.5">
+                <p className="font-semibold text-red-200">Alert Notification</p>
+                <p className="text-red-400/90 font-mono leading-relaxed">{priceError || error}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Results and Recommendations Dashboard */}
+        <div className="max-w-4xl mx-auto space-y-8">
+          {result && <PnlResult result={result} />}
+
+          {result && !result.isProfit && (
+            <StockRecommendations 
+              recommendations={recommendations}
+              isLoading={isLoading && !result.isProfit}
+              error={!priceError ? error : null} 
+              lossAmount={result.pnl}
+            />
+          )}
+        </div>
+
       </main>
     </div>
   );

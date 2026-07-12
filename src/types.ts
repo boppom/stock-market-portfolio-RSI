@@ -8,6 +8,10 @@ export interface PnlInput {
 export interface PnlResult {
   pnl: number;
   isProfit: boolean;
+  totalCost?: number;
+  currentValue?: number;
+  percentage?: number;
+  symbol?: string;
 }
 
 export interface StockRecommendation {
