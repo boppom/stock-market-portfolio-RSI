@@ -1,6 +1,6 @@
 import React from 'react';
 import { StockRecommendation } from '../types';
-import { RecommendationCard } from './recommendation-card';
+import { RecommendationCard } from './RecommendationCard';
 import { LightBulbIcon } from './icons';
 
 interface StockRecommendationsProps {

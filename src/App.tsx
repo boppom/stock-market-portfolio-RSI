@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { PnlCalculator } from './components/pnl-calculator';
-import { PnlResult } from './components/pnl-result';
-import { StockRecommendations } from './components/stock-recommendations';
+import { PnlCalculator } from './components/PnlCalculator';
+import { PnlResult } from './components/PnlResult';
+import { StockRecommendations } from './components/StockRecommendations';
 import { PnlInput, PnlResult as PnlResultType, StockRecommendation } from './types';
-import { fetchStockRecommendations, fetchCurrentStockPrice } from './services/gemini-service';
+import { fetchStockRecommendations, fetchCurrentStockPrice } from './services/geminiService';
 
 const App: React.FC = () => {
   const [input, setInput] = useState<PnlInput>({
