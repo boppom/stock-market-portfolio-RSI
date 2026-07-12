@@ -3,7 +3,7 @@ import { PnlCalculator } from './components/pnl-calculator';
 import { PnlResult } from './components/pnl-result';
 import { StockRecommendations } from './components/stock-recommendations';
 import { PnlInput, PnlResult as PnlResultType, StockRecommendation } from './types';
-import { fetchStockRecommendations, fetchCurrentStockPrice } from './services/geminiService';
+import { fetchStockRecommendations, fetchCurrentStockPrice } from './services/gemini-service';
 
 const App: React.FC = () => {
   const [input, setInput] = useState<PnlInput>({
