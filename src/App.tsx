@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { PnlCalculator } from './components/PnlCalculator';
-import { PnlResult } from './components/PnlResult';
-import { StockRecommendations } from './components/StockRecommendations';
+import { PnlCalculator } from './components/pnl-calculator';
+import { PnlResult } from './components/pnl-result';
+import { StockRecommendations } from './components/stock-recommendations';
 import { PnlInput, PnlResult as PnlResultType, StockRecommendation } from './types';
 import { fetchStockRecommendations, fetchCurrentStockPrice } from './services/geminiService';
 
