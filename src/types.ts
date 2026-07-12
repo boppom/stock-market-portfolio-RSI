@@ -220,9 +220,13 @@ export interface StockListItem {
   name: string;
 }
 
+const API_BASE = window.location.hostname.includes("github.io")
+  ? "https://stock-market-portfolio-rsi.onrender.com"
+  : "";
+
 export const fetchStockRecommendations = async (lossAmount: number): Promise<StockRecommendation[]> => {
   try {
-    const response = await fetch("/api/stock/recommendations", {
+    const response = await fetch(`${API_BASE}/api/stock/recommendations`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -247,7 +251,7 @@ export const fetchStockRecommendations = async (lossAmount: number): Promise<Sto
 
 export const fetchCurrentStockPrice = async (symbol: string): Promise<number> => {
   try {
-    const response = await fetch(`/api/stock/price?symbol=${encodeURIComponent(symbol)}`);
+    const response = await fetch(`${API_BASE}/api/stock/price?symbol=${encodeURIComponent(symbol)}`);
 
     if (!response.ok) {
       const errData = await response.json().catch(() => ({}));
