@@ -24,10 +24,12 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 // server/server.ts
 var import_express = __toESM(require("express"), 1);
 var import_path = __toESM(require("path"), 1);
+var import_cors = __toESM(require("cors"), 1);
 var import_vite = require("vite");
 var import_genai = require("@google/genai");
 var app = (0, import_express.default)();
 var PORT = 3e3;
+app.use((0, import_cors.default)());
 app.use(import_express.default.json());
 var GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 var ai = new import_genai.GoogleGenAI({
