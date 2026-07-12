@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StockRecommendation } from '../types';
-import { ShareIcon } from './Icons';
+import { Share2 } from 'lucide-react';
 
 interface RecommendationCardProps {
     stock: StockRecommendation;
@@ -59,7 +59,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({ stock })
                     className="flex items-center space-x-2 text-sm text-gray-400 hover:text-white transition-colors"
                     aria-label="Share recommendation"
                 >
-                    <ShareIcon className="h-4 w-4" />
+                    <Share2 className="h-4 w-4" />
                     <span>{copied ? 'Copied!' : 'Share RSI'}</span>
                 </button>
             </div>

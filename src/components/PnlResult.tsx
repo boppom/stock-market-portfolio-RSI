@@ -1,6 +1,6 @@
 import React from 'react';
 import { PnlResult as PnlResultType } from '../types';
-import { TrendUpIcon, TrendDownIcon } from './Icons';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 
 interface PnlResultProps {
   result: PnlResultType;
@@ -22,7 +22,7 @@ export const PnlResult: React.FC<PnlResultProps> = ({ result }) => {
   return (
     <div className={`mt-8 p-6 rounded-xl shadow-lg ${bgColor} border ${borderColor} flex flex-col items-center justify-center text-center`}>
       <div className="flex items-center space-x-4">
-        {isProfit ? <TrendUpIcon /> : <TrendDownIcon />}
+        {isProfit ? <TrendingUp className="h-8 w-8 text-green-400" /> : <TrendingDown className="h-8 w-8 text-red-400" />}
         <div>
           <p className={`text-lg font-medium text-gray-300`}>
             {isProfit ? 'Unrealized Profit' : 'Unrealized Loss'}

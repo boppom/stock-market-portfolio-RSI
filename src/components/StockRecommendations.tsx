@@ -1,7 +1,7 @@
 import React from 'react';
 import { StockRecommendation } from '../types';
 import { RecommendationCard } from './RecommendationCard';
-import { LightBulbIcon } from './Icons';
+import { Lightbulb } from 'lucide-react';
 
 interface StockRecommendationsProps {
   recommendations: StockRecommendation[];
@@ -44,7 +44,7 @@ export const StockRecommendations: React.FC<StockRecommendationsProps> = ({ reco
   return (
     <div className="mt-12">
         <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-white flex items-center justify-center gap-3"><LightBulbIcon /> AI-Powered Recommendations</h2>
+            <h2 className="text-3xl font-bold text-white flex items-center justify-center gap-3"><Lightbulb className="h-6 w-6 text-yellow-400" /> AI-Powered Recommendations</h2>
             <p className="text-gray-400 mt-2">
                 Based on your unrealized loss of <span className="font-semibold text-red-400">{formattedLoss}</span>, here are stocks identified by RSI analysis that may present a recovery opportunity.
             </p>

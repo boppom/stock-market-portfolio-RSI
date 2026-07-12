@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { PnlInput } from '../types';
-import { RupeeIcon, SpinnerIcon } from './Icons';
-import { indianStockList } from '../data/Stocks';
-
+import { PnlInput, indianStockList } from '../types';
+import { IndianRupee, Loader2 } from 'lucide-react';
+ 
 interface PnlCalculatorProps {
   input: PnlInput;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -11,7 +10,7 @@ interface PnlCalculatorProps {
   isLoading: boolean;
   isPriceLoading: boolean;
 }
-
+ 
 const InputField: React.FC<{
     id: keyof PnlInput;
     label: string;
@@ -31,7 +30,7 @@ const InputField: React.FC<{
         <div className="mt-1 relative rounded-md shadow-sm">
             {hasIcon && (
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <RupeeIcon className="h-5 w-5 text-gray-400" />
+                    <IndianRupee className="h-5 w-5 text-gray-400" />
                 </div>
             )}
             <input
@@ -48,7 +47,7 @@ const InputField: React.FC<{
             />
             {isLoading && (
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    <SpinnerIcon className="h-5 w-5 text-gray-400" />
+                    <Loader2 className="animate-spin h-5 w-5 text-gray-400" />
                 </div>
             )}
         </div>
