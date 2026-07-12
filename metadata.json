@@ -1,0 +1,8 @@
+{
+  "name": "Indian Stock PNL & RSI Advisor",
+  "description": "A web application to calculate Profit/Loss (PNL) for Indian stocks. When a loss is calculated, it uses the Gemini API to recommend other Indian stocks based on the Relative Strength Index (RSI) oversold strategy to help recoup losses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
