@@ -2,8 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { PnlCalculator } from './components/PnlCalculator';
 import { PnlResult } from './components/PnlResult';
 import { StockRecommendations } from './components/StockRecommendations';
-import { PnlInput, PnlResult as PnlResultType, StockRecommendation } from './types';
-import { fetchStockRecommendations, fetchCurrentStockPrice } from './services/geminiService';
+import { PnlInput, PnlResult as PnlResultType, StockRecommendation, fetchStockRecommendations, fetchCurrentStockPrice } from './types';
 
 const App: React.FC = () => {
   const [input, setInput] = useState<PnlInput>({
