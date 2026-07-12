@@ -1,7 +1,7 @@
 import React from 'react';
 import { StockRecommendation } from '../types';
 import { RecommendationCard } from './RecommendationCard';
-import { LightBulbIcon } from './icons';
+import { LightBulbIcon } from './Icons';
 
 interface StockRecommendationsProps {
   recommendations: StockRecommendation[];

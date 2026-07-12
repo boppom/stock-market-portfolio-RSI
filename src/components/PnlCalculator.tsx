@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PnlInput } from '../types';
-import { RupeeIcon, SpinnerIcon } from './icons';
-import { indianStockList } from '../data/stocks';
+import { RupeeIcon, SpinnerIcon } from './Icons';
+import { indianStockList } from '../data/Stocks';
 
 interface PnlCalculatorProps {
   input: PnlInput;

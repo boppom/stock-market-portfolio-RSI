@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StockRecommendation } from '../types';
-import { ShareIcon } from './icons';
+import { ShareIcon } from './Icons';
 
 interface RecommendationCardProps {
     stock: StockRecommendation;

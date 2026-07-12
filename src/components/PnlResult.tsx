@@ -1,6 +1,6 @@
 import React from 'react';
 import { PnlResult as PnlResultType } from '../types';
-import { TrendUpIcon, TrendDownIcon } from './icons';
+import { TrendUpIcon, TrendDownIcon } from './Icons';
 
 interface PnlResultProps {
   result: PnlResultType;
