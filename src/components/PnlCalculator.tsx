@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PnlInput, indianStockList } from '../types';
-import { IndianRupee, Loader2, Search, Briefcase, ChevronRight, Hash } from 'lucide-react';
+import { IndianRupee, Loader2, Search, Briefcase, ChevronRight, Hash, Sparkles } from 'lucide-react';
  
 interface PnlCalculatorProps {
   input: PnlInput;
@@ -124,6 +124,32 @@ export const PnlCalculator: React.FC<PnlCalculatorProps> = ({ input, onInputChan
                 
                 {isSearchVisible && (
                      <div className="absolute z-30 mt-2 w-full bg-[#0e1322] border border-gray-800 rounded-xl shadow-2xl max-h-64 overflow-y-auto backdrop-blur-xl">
+                        {/* Dynamic Custom Symbol Lookup */}
+                        {searchTerm.trim().length > 0 && (
+                            <div className="p-1.5 border-b border-gray-800/60 bg-indigo-500/5">
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const formatted = searchTerm.trim().toUpperCase();
+                                        const finalSymbol = formatted.endsWith('.NS') ? formatted : `${formatted}.NS`;
+                                        handleSymbolSelect(finalSymbol);
+                                    }}
+                                    className="w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-600/25 text-indigo-300 hover:text-white transition-all flex justify-between items-center cursor-pointer group"
+                                >
+                                    <div className="flex flex-col">
+                                        <span className="text-xs font-bold uppercase tracking-wider flex items-center">
+                                            <Sparkles className="h-3.5 w-3.5 mr-1.5 text-indigo-400 animate-pulse" />
+                                            Lookup Custom NSE Stock
+                                        </span>
+                                        <span className="text-[11px] text-gray-400 font-mono mt-0.5">
+                                            Use symbol "{searchTerm.trim().toUpperCase()}{searchTerm.trim().toUpperCase().endsWith('.NS') ? '' : '.NS'}"
+                                        </span>
+                                    </div>
+                                    <ChevronRight className="h-4 w-4 text-indigo-400 group-hover:translate-x-0.5 transition-transform" />
+                                </button>
+                            </div>
+                        )}
+
                         {filteredStocks.length > 0 ? (
                             <ul className="py-1.5 divide-y divide-gray-800/30">
                                 {filteredStocks.slice(0, 8).map(stock => (
@@ -139,7 +165,7 @@ export const PnlCalculator: React.FC<PnlCalculatorProps> = ({ input, onInputChan
                                 ))}
                             </ul>
                         ) : (
-                            <div className="px-4 py-3.5 text-sm text-gray-400">No matching NSE stocks found.</div>
+                            <div className="px-4 py-3.5 text-sm text-gray-400">No matching NSE stocks found in standard list. Select the custom lookup above.</div>
                         )}
                     </div>
                 )}
